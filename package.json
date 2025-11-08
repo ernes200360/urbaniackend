@@ -1,0 +1,23 @@
+{
+  "name": "backendsurbania",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend_antimulticuenta_biometrico_js.js",
+  "scripts": {
+    "start": "node backend_auth_oauth_js.js"
+}
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernes200360/urbaniackend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ernes200360/urbaniackend/issues"
+  },
+  "homepage": "https://github.com/ernes200360/urbaniackend#readme"
+}
