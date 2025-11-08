@@ -4,8 +4,7 @@
   "description": "",
   "main": "backend_antimulticuenta_biometrico_js.js",
   "scripts": {
-    "scripts": {
-  "start": "node server.js"
+    "start": "node server.js"
 }
 
 
