@@ -27,27 +27,27 @@ app.get("/", (req, res) => {
   res.send("Backend de Urbania funcionando correctamente ✅");
 });
 
-// ✅ LOGIN REAL
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
+// ✅ Crear una nueva publicación
+app.post("/posts", (req, res) => {
+  const { autor, texto } = req.body;
 
-  const user = usuarios.find(
-    (u) => u.email === email && u.password === password
-  );
-
-  if (user) {
-    return res.json({
-      success: true,
-      mensaje: "Inicio de sesión exitoso",
-      nombre: user.nombre
-    });
-  } else {
-    return res.json({
-      success: false,
-      mensaje: "Credenciales incorrectas"
-    });
+  if (!autor || !texto) {
+    return res.json({ success: false, mensaje: "Faltan datos" });
   }
+
+  const nueva = {
+    id: posts.length + 1,
+    autor,
+    texto,
+    likes: 0,
+    fecha: new Date().toLocaleString()
+  };
+
+  posts.unshift(nueva); // ✅ La publicación nueva aparece arriba
+
+  res.json({ success: true, mensaje: "Publicación creada", post: nueva });
 });
+
 
 // ✅ REGISTRO REAL
 app.post("/register", (req, res) => {
