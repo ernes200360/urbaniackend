@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Usuarios de prueba (luego los pondremos en BD real)
+// ✅ Usuarios de prueba
 const usuarios = [
   { email: "admin@urbania.com", password: "admin123", nombre: "Administrador" }
 ];
@@ -33,13 +33,14 @@ app.post("/login", (req, res) => {
     return res.json({
       success: false,
       mensaje: "Credenciales incorrectas"
-    });  
+    });
+  }
+});
 
 // ✅ REGISTRO REAL
 app.post("/register", (req, res) => {
   const { email, password, nombre } = req.body;
 
-  // Verificar si ya existe
   const existe = usuarios.find((u) => u.email === email);
 
   if (existe) {
@@ -49,7 +50,6 @@ app.post("/register", (req, res) => {
     });
   }
 
-  // Agregar nuevo usuario
   usuarios.push({ email, password, nombre });
 
   return res.json({
@@ -58,9 +58,8 @@ app.post("/register", (req, res) => {
   });
 });
 
-  }
-});
-
 // ✅ Puerto automático para Render
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("✅ Backend Urbania corriendo en puerto " + PORT));
+app.listen(PORT, () =>
+  console.log("✅ Backend Urbania corriendo en puerto " + PORT)
+);
