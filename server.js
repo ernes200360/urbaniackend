@@ -33,7 +33,31 @@ app.post("/login", (req, res) => {
     return res.json({
       success: false,
       mensaje: "Credenciales incorrectas"
+    });  
+
+// ✅ REGISTRO REAL
+app.post("/register", (req, res) => {
+  const { email, password, nombre } = req.body;
+
+  // Verificar si ya existe
+  const existe = usuarios.find((u) => u.email === email);
+
+  if (existe) {
+    return res.json({
+      success: false,
+      mensaje: "El correo ya está registrado"
     });
+  }
+
+  // Agregar nuevo usuario
+  usuarios.push({ email, password, nombre });
+
+  return res.json({
+    success: true,
+    mensaje: "Usuario registrado con éxito"
+  });
+});
+
   }
 });
 
