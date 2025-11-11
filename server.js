@@ -5,29 +5,38 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Ruta raíz (ya existente)
+// ✅ Usuarios de prueba (luego los pondremos en BD real)
+const usuarios = [
+  { email: "admin@urbania.com", password: "admin123", nombre: "Administrador" }
+];
+
+// ✅ Ruta principal
 app.get("/", (req, res) => {
-  res.send("✅ Backend de Urbania funcionando correctamente");
+  res.send("Backend de Urbania funcionando correctamente ✅");
 });
 
-// Ruta para iniciar sesión
+// ✅ LOGIN REAL
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  if (email === "admin@urbania.com" && password === "1234") {
-    res.json({ success: true, message: "Inicio de sesión exitoso 🌆" });
+  const user = usuarios.find(
+    (u) => u.email === email && u.password === password
+  );
+
+  if (user) {
+    return res.json({
+      success: true,
+      mensaje: "Inicio de sesión exitoso",
+      nombre: user.nombre
+    });
   } else {
-    res.status(401).json({ success: false, message: "Credenciales inválidas ❌" });
+    return res.json({
+      success: false,
+      mensaje: "Credenciales incorrectas"
+    });
   }
 });
 
-// Ruta para registrar usuario
-app.post("/register", (req, res) => {
-  const { username, email, password } = req.body;
-  console.log("Nuevo registro:", username, email);
-  res.json({ success: true, message: "Usuario registrado correctamente 🖤" });
-});
-
-// Puerto
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Servidor funcionando en puerto ${port}`));
+// ✅ Puerto automático para Render
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("✅ Backend Urbania corriendo en puerto " + PORT));
